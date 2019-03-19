@@ -37,12 +37,8 @@ random_lot_slab_alloc(struct foo **buffer, size_t size, struct slab_cache *cache
 	} while(allocd < size);
 
 	do {
-		size_t index = rand() % size;
-		if(buffer[index] != NULL) {
-			slab_cache_dealloc(cache, buffer[index]);
-			buffer[index] = NULL;
-			--allocd;
-		}
+		--allocd;
+		slab_cache_dealloc(cache, buffer[allocd]);
 	} while(allocd != 0);
 }
 
@@ -65,6 +61,7 @@ main(int argc,
 	random_lot_slab_alloc(buffer, size, &cache);
 
 	slab_cache_deinit(&cache);
+
 	free(buffer);
 
 	return 0;
