@@ -1,3 +1,10 @@
+/*
+	slab_alloc.h
+	Copyright (c) 2019, Valentin Debon
+
+	This file is part of the slab_alloc repository
+	subject the BSD 3-Clause License, see LICENSE.txt
+*/
 #ifndef SLAB_ALLOC_H
 #define SLAB_ALLOC_H
 
