@@ -13,6 +13,8 @@
 #include <unistd.h> /* sysconf */
 #include <sys/mman.h> /* mmap, munmap */
 
+#include <stdio.h>
+
 /* We will safely assume the long -> size_t cast in this code */
 #define GET_PAGESIZE() sysconf(_SC_PAGESIZE)
 
@@ -101,6 +103,7 @@ slab_cache_deinit(struct slab_cache *cache) {
 			struct slab *next = current->next;
 
 			munmap((uint8_t *)(current + 1) - pagesize, pagesize);
+			current = next;
 		}
 	}
 }
@@ -121,17 +124,17 @@ slab_cache_alloc(struct slab_cache *cache) {
 			uint8_t *buffer = page + cache->stride;
 			slab = (struct slab *)(page + pagesize - sizeof(struct slab));
 
+			slab->freelist = buffer;
 			while(buffer < (uint8_t *)slab) {
 				uint8_t * const next = buffer + cache->stride;
 				*((void **)buffer) = next;
 				buffer = next;
 			}
-
-			ptr = page;
-			slab->freelist = buffer;
 			slab->count = 1;
 
 			slab_cache_push_front(cache, slab);
+
+			ptr = page;
 		}
 	} else {
 		ptr = slab->freelist;
