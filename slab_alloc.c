@@ -13,8 +13,6 @@
 #include <unistd.h> /* sysconf */
 #include <sys/mman.h> /* mmap, munmap */
 
-#include <stdio.h>
-
 /* We will safely assume the long -> size_t cast in this code */
 #define GET_PAGESIZE() sysconf(_SC_PAGESIZE)
 
