@@ -1,5 +1,5 @@
 #include "slab_alloc.h"
-
+#define __STDC_WANT_LIB_EXT1__ 1
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +9,9 @@
 #ifndef _WIN32
 #define SZ_FMT "%lu"
 #else
+#define WIN32_LEAN_AND_MEAN 1
+#define STRICT 1
+#include <windows.h>
 #define SZ_FMT "%zu"
 #endif
 
@@ -39,8 +42,17 @@ static inline void
 random_lot_slab_alloc(const unsigned size, struct foo* buffer[const size], struct slab_cache *cache) {
 	
 	size_t allocd = 0;
-
-	memset(buffer, 0, sizeof(struct foo * [size]));
+#ifdef __STDC_LIB_EXT1__
+	errno_t err = memset_s(buffer, size, 0, sizeof(struct foo * [size]));
+	assert(err == 0);
+#else
+#ifndef _WIN32
+	void * err = memset(buffer, 0, sizeof(struct foo* [size]));
+#else // _WIN32
+	void * err = SecureZeroMemory(buffer, sizeof(struct foo* [size]));
+	assert(err != 0);
+#endif
+#endif 
 
 	do {
 		size_t index = rand() % size;
@@ -60,9 +72,8 @@ int main( const int argc,	char * argv[const argc])
 {
 	// size_t const size = 0xF; // 65536;
 	// struct foo** const buffer = malloc(sizeof(*buffer) * size);
-	// struct foo(*buffer)[size] = malloc(sizeof(struct foo[size])); // malloc(sizeof(*buffer) * size);
-	// typedef struct foo(*buffer)[buffer_size];
-	foo_arr_ptr buffer = calloc(1,sizeof(*buffer)); // malloc(sizeof(*buffer) * size);
+
+	foo_arr_ptr buffer = calloc(1, sizeof(*buffer)); // malloc(sizeof(*buffer) * size);
 	
 	assert(buffer);
 
