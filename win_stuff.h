@@ -4,13 +4,6 @@
 #error win32 clang build please (hint: use Visual Studio)
 #endif 
 
-#include <io.h>
-#define WIN32_LEAN_AND_MEAN 1
-#define STRICT 1
-#include <windows.h>
-#include <sys/types.h>
-
-
 #ifdef __cpluplus
 extern "C" {
 #endif // __cpluplus
@@ -57,6 +50,13 @@ extern "C" {
 
 #ifdef MMAP_WIN_IMPLEMENTATION
 
+#define WIN32_LEAN_AND_MEAN 1
+#define STRICT 1
+#include <windows.h>
+#include <sys/types.h>
+#include <errno.h>
+#include <io.h>
+
 	static inline /* unsigned long aka */ DWORD win_page_size(void)
 	{
 		static SYSTEM_INFO sysInfo_ = { .dwPageSize = 0 };         // Useful information about the system
@@ -75,10 +75,6 @@ extern "C" {
 	 *  author: Xiongfei Shi <jenson.shixf(a)gmail.com>
 	 *  license: MIT
 	 */
-
-#include <Windows.h>
-#include <errno.h>
-#include <io.h>
 
 #define MS_ASYNC            1
 #define MS_SYNC             2
