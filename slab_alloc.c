@@ -10,11 +10,21 @@
 #include <stdint.h> /* uint8_t uintptr_t */
 #include <stdbool.h> /* bool */
 #include <stdlib.h> /* NULL */
+
+#ifndef _WIN32
 #include <unistd.h> /* sysconf */
 #include <sys/mman.h> /* mmap, munmap */
+#else // _WIN32
+#define MMAP_WIN_IMPLEMENTATION
+#include "win_stuff.h"
+#endif
 
+#ifndef _WIN32
 /* We will safely assume the long -> size_t cast in this code */
 #define GET_PAGESIZE() sysconf(_SC_PAGESIZE)
+#else
+#define GET_PAGESIZE() win_page_size()
+#endif // _WIN32
 
 static void
 slab_cache_push_front(struct slab_cache *cache,

@@ -1,3 +1,7 @@
+# dbjdbj refactoring attempt for running on win32
+
+&copy; 2022 by dbj@dbj.org, CC BY SA 4.0
+
 # Simplified Slab allocator
 
 ANSI-C simplified slab allocator. Concepts taken from "The Slab Allocator: An Object-Caching Kernel Memory Allocator" By Jeff Bonwick.

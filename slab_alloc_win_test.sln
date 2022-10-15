@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "slab_alloc_win_test", "slab_alloc_win_test.vcxproj", "{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Debug|x64.ActiveCfg = Debug|x64
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Debug|x64.Build.0 = Debug|x64
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Debug|x86.ActiveCfg = Debug|Win32
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Debug|x86.Build.0 = Debug|Win32
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Release|x64.ActiveCfg = Release|x64
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Release|x64.Build.0 = Release|x64
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Release|x86.ActiveCfg = Release|Win32
+		{B93D7B6E-DEEA-400C-BA26-18E9E57B918E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D9C36EF-8D07-4F47-BA26-1D9ED51056A5}
+	EndGlobalSection
+EndGlobal
